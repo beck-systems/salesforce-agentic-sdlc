@@ -139,6 +139,38 @@ class GuardTest(unittest.TestCase):
         self.assertEqual(self.bash(q, "sf project deploy start --source-dir force-app -o dev"), "deny")
         self.assertEqual(self.bash(q, "sf apex run test -n RegionTest -o qa"), "allow")
 
+    # ---- crash path: Claude Code only blocks on exit 2, so a crash must never exit 1 ----
+    GUARDS = ("sf-readonly-guard.py", "sf-builder-guard.py", "sf-qa-guard.py")
+
+    def run_raw(self, hook, stdin, config=None):
+        env = dict(os.environ, SF_TICKET_CONFIG=config or self.config)
+        return subprocess.run([sys.executable, os.path.join(HOOKS, hook)], input=stdin,
+                              capture_output=True, text=True, env=env)
+
+    def test_malformed_config_blocks(self):
+        bad = os.path.join(self.tmp, "bad-config.json")
+        with open(bad, "w") as f:
+            json.dump({"orgs": ["dev"]}, f)  # a list where a dict is expected
+        prod_deploy = json.dumps({"tool_name": "Bash",
+                                  "tool_input": {"command": "sf project deploy start -o prod"}})
+        for hook in self.GUARDS:
+            p = self.run_raw(hook, prod_deploy, bad)
+            self.assertEqual(p.returncode, 2, hook)
+            self.assertIn("[sf-guard] guard crashed", p.stderr, hook)
+
+    def test_unhandled_exception_blocks(self):
+        bad_input = json.dumps({"tool_name": "Bash", "tool_input": "sf project deploy start -o prod"})
+        for hook in self.GUARDS:
+            self.assertEqual(self.run_raw(hook, bad_input).returncode, 2, hook)
+
+    def test_unreadable_input_denies(self):
+        for hook in self.GUARDS:
+            for stdin in ("not json", "[]", ""):
+                p = self.run_raw(hook, stdin)
+                self.assertEqual(p.returncode, 0, hook)
+                decision = json.loads(p.stdout)["hookSpecificOutput"]["permissionDecision"]
+                self.assertEqual(decision, "deny", f"{hook} {stdin!r}")
+
 
 if __name__ == "__main__":
     unittest.main()

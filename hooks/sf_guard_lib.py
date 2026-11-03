@@ -68,10 +68,14 @@ DENY, ASK, DEFER, ALLOW = 3, 2, 1, 0
 
 
 def read_input():
+    # Input we can't read is denied, not deferred: an unparsed call must never slip through.
     try:
-        return json.load(sys.stdin)
-    except Exception:
-        return {}
+        data = json.load(sys.stdin)
+    except ValueError:
+        emit(DENY, "could not parse the hook input")
+    if not isinstance(data, dict):
+        emit(DENY, "hook input is not a JSON object")
+    return data
 
 
 def emit(decision, reason):

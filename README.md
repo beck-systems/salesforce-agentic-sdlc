@@ -54,10 +54,12 @@ busy object. This design pulls those steps apart:
 
 The hooks live in [`hooks/`](hooks). They split each Bash command into segments, classify every
 segment, and the most restrictive decision wins. Any org alias that isn't recognised as the
-build or QA org is treated as Prod, so a typo fails safe.
+build or QA org is treated as Prod, so a typo fails safe. The hooks fail closed too: Claude Code
+only blocks a tool call on exit code 2, so a crashed guard exits 2 rather than 1, and input it
+can't parse is denied.
 
 ```bash
-python3 -m unittest discover tests -v   # 9 tests, 48 allow/ask/deny assertions
+python3 -m unittest discover tests -v   # 12 tests: the allow/ask/deny rules plus the crash paths
 ```
 
 ## Lanes

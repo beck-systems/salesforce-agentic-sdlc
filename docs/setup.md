@@ -62,7 +62,14 @@ python3 -m unittest discover tests -v
 
 The suite feeds real tool-call payloads to each hook and checks the allow / ask / deny decision
 for the cases that matter: Prod writes, unapproved deploys, a spec edited after approval, git
-pushes, protected paths, and QA-org prompts.
+pushes, protected paths, and QA-org prompts. It also covers the crash paths: a malformed
+`config.json`, input that isn't JSON, and an exception inside a guard must all block the call.
+
+Claude Code only blocks a tool call when a hook exits with code 2. Any other non-zero exit is
+reported and the call goes ahead, so each guard turns a crash into exit 2. One failure can't be
+caught from inside the script: if `python3` isn't on the PATH or the hook path in an agent file is
+wrong, the shell exits 127 and the call is not blocked. Run the suite after installing, and
+check that the paths in `~/.claude/agents/sf-*.md` point at real files.
 
 ## First run
 

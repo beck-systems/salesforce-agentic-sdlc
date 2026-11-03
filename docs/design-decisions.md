@@ -19,7 +19,12 @@ Prompts restate the rules, but PreToolUse hooks enforce them:
 - builder: build org allowed, QA org asks, Prod and unrecognised orgs denied, missing `-o` denied
 - QA: test-record writes only, never metadata, never Prod
 
-The test suite in `tests/` checks each rule with real tool-call payloads.
+The hooks fail closed. Claude Code only blocks on exit code 2, and an uncaught Python exception
+exits 1, which would let the call through. Each guard installs an exception hook that exits 2
+instead, and unreadable input is denied rather than deferred.
+
+The test suite in `tests/` checks each rule with real tool-call payloads, and checks that a
+malformed config, bad input and an internal exception all block.
 
 ## Approval is a hash, not a status
 The operator approves the spec in the terminal. The orchestrator writes `approved.json` with the

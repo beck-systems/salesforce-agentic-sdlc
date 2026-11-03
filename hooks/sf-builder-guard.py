@@ -11,6 +11,19 @@
 import os
 import re
 import sys
+import traceback
+
+
+def fail_closed(etype, value, tb):
+    # Claude Code only blocks a tool call on exit 2. An uncaught exception exits 1, which would
+    # let the call through, so any crash (bad config, bad input, a bug here) blocks instead.
+    traceback.print_exception(etype, value, tb)
+    sys.stderr.write("[sf-guard] guard crashed; blocking this call until the hook is fixed\n")
+    sys.stderr.flush()
+    os._exit(2)
+
+
+sys.excepthook = fail_closed
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from sf_guard_lib import (ALLOW, ASK, BRANCH, BUILD_ALIAS, CASES, DEFER, DENY, REPO, WORKTREE_RE,
