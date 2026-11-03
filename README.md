@@ -110,7 +110,7 @@ a Salesforce source repo in git deployed with **Gearset**, and MCP connectors fo
 ## Quick start
 
 ```bash
-git clone https://github.com/<you>/salesforce-agentic-sdlc.git
+git clone https://github.com/beck-systems/salesforce-agentic-sdlc.git
 cd salesforce-agentic-sdlc
 ./install.sh
 ```

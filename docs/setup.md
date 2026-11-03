@@ -18,7 +18,7 @@ Optional: a Salesforce MCP connector (data reads), and the `salesforce-developme
 ## Install
 
 ```bash
-git clone https://github.com/<you>/salesforce-agentic-sdlc.git
+git clone https://github.com/beck-systems/salesforce-agentic-sdlc.git
 cd salesforce-agentic-sdlc
 ./install.sh            # copies into ~/.claude; set CLAUDE_HOME to install elsewhere
 ```
