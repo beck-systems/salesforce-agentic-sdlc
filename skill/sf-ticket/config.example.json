@@ -1,0 +1,11 @@
+{
+  "_comment": "Copy to config.json next to this file (install.sh does it). Read by the guard hooks. Org-specific prose (Jira projects, Slack channels, Gearset IDs) lives in references/org-profile.md.",
+  "cases_dir": "~/sf-cases",
+  "repo_path": "~/code/salesforce",
+  "default_branch": "main",
+  "protected_paths": ["~/Documents/Notes"],
+  "orgs": {
+    "build": ["dev", "*.dev"],
+    "qa": ["qa", "staging", "*.qa", "*.staging"]
+  }
+}

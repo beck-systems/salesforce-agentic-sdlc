@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 690" role="img" aria-label="Architecture: the operator approves; the orchestrator briefs four read-only agents and two writer agents, which write findings to a shared case folder; only the orchestrator takes outward actions after an OK.">
+  <style>
+    .t{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;fill:#18212b}
+    .m{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    .muted{fill:#5b6776}
+    .lbl{font-size:11px;letter-spacing:1.2px;font-weight:600}
+    .ro{fill:#f3f7fc;stroke:#2563a8;stroke-width:1.5}
+    .wr{fill:#fdf5ec;stroke:#b45309;stroke-width:1.5}
+    .or{fill:#ffffff;stroke:#8795a6;stroke-width:1.5}
+    .gate{fill:#f1ebfe;stroke:#7c3aed;stroke-width:1.5}
+    .ar{stroke:#5b6776;stroke-width:1.6;fill:none}
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#5b6776"/></marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="1199" height="689" rx="14" fill="#f8fafc" stroke="#d6dde6"/>
+  <text x="40" y="44" class="t" font-size="22" font-weight="700">Who does what</text>
+  <text x="40" y="66" class="t muted" font-size="13">Agents investigate and build. Only the orchestrator acts on the outside world, and only after the operator says yes.</text>
+
+  <!-- what agents can't do -->
+  <rect x="40" y="92" width="320" height="158" rx="10" fill="#fdf3f2" stroke="#b42318" stroke-width="1.2"/>
+  <text x="56" y="116" class="t lbl" fill="#b42318">AGENTS CAN'T</text>
+  <text x="56" y="142" class="t" font-size="12.5">write to Jira, Confluence or Slack</text>
+  <text x="56" y="162" class="t" font-size="12.5">open or promote Gearset PRs</text>
+  <text x="56" y="182" class="t" font-size="12.5">write to Prod in any way</text>
+  <text x="56" y="202" class="t" font-size="12.5">write outside their case folder</text>
+  <text x="56" y="232" class="t muted" font-size="11.5">enforced by disallowedTools + PreToolUse hooks</text>
+
+  <!-- operator + orchestrator -->
+  <rect x="500" y="92" width="200" height="46" rx="23" class="gate"/>
+  <text x="600" y="120" class="t" font-size="15" font-weight="700" text-anchor="middle" fill="#5b21b6">Operator (you)</text>
+  <line x1="600" y1="138" x2="600" y2="178" class="ar" marker-end="url(#a)"/>
+  <text x="612" y="163" class="t muted" font-size="11.5">approves · answers each ⏸</text>
+  <rect x="420" y="180" width="360" height="70" rx="10" class="or"/>
+  <text x="600" y="210" class="t" font-size="17" font-weight="700" text-anchor="middle">Orchestrator</text>
+  <text x="600" y="232" class="t m muted" font-size="12" text-anchor="middle">/sf-ticket skill · main session</text>
+
+  <!-- outward actions -->
+  <rect x="840" y="92" width="320" height="158" rx="10" class="gate"/>
+  <text x="856" y="116" class="t lbl" fill="#6d28d9">⏸ OUTWARD ACTIONS</text>
+  <text x="856" y="142" class="t" font-size="12.5">Jira comment, transition, create</text>
+  <text x="856" y="162" class="t" font-size="12.5">Confluence release note or how-to</text>
+  <text x="856" y="182" class="t" font-size="12.5">Slack reply in the request thread</text>
+  <text x="856" y="202" class="t" font-size="12.5">Gearset PR and promotion</text>
+  <text x="856" y="222" class="t" font-size="12.5">Prod record and user fixes, logged</text>
+  <line x1="780" y1="215" x2="838" y2="215" class="ar" marker-end="url(#a)"/>
+  <text x="809" y="207" class="t muted" font-size="11" text-anchor="middle">after OK</text>
+
+  <!-- read-only zone -->
+  <rect x="40" y="300" width="400" height="236" rx="12" fill="none" stroke="#2563a8" stroke-dasharray="6 4"/>
+  <text x="56" y="322" class="t lbl" fill="#1d4f86">READ-ONLY · sf-readonly-guard.py</text>
+  <rect x="56" y="338" width="176" height="74" rx="8" class="ro"/>
+  <text x="68" y="362" class="t m" font-size="13" font-weight="700" fill="#1d4f86">sf-intake</text>
+  <text x="68" y="382" class="t" font-size="12">lane, claims, prior art</text>
+  <text x="68" y="400" class="t muted" font-size="11">Sonnet</text>
+  <rect x="248" y="338" width="176" height="74" rx="8" class="ro"/>
+  <text x="260" y="362" class="t m" font-size="12.5" font-weight="700" fill="#1d4f86">sf-org-investigator</text>
+  <text x="260" y="382" class="t" font-size="12">live org, save order</text>
+  <text x="260" y="400" class="t muted" font-size="11">session model</text>
+  <rect x="56" y="424" width="176" height="74" rx="8" class="ro"/>
+  <text x="68" y="448" class="t m" font-size="12" font-weight="700" fill="#1d4f86">sf-repo-investigator</text>
+  <text x="68" y="468" class="t" font-size="12">git + Gearset history</text>
+  <text x="68" y="486" class="t muted" font-size="11">Sonnet</text>
+  <rect x="248" y="424" width="176" height="74" rx="8" class="ro"/>
+  <text x="260" y="448" class="t m" font-size="13" font-weight="700" fill="#1d4f86">sf-verifier</text>
+  <text x="260" y="468" class="t" font-size="12">tries to refute the team</text>
+  <text x="260" y="486" class="t muted" font-size="11">Opus</text>
+  <text x="56" y="524" class="t muted" font-size="11.5">re-run evidence, never change state</text>
+
+  <!-- writers zone -->
+  <rect x="760" y="300" width="400" height="236" rx="12" fill="none" stroke="#b45309" stroke-dasharray="6 4"/>
+  <text x="776" y="322" class="t lbl" fill="#8f3f07">WRITERS · one guard each</text>
+  <rect x="776" y="338" width="368" height="90" rx="8" class="wr"/>
+  <text x="790" y="362" class="t m" font-size="13" font-weight="700" fill="#8f3f07">sf-builder</text>
+  <text x="1130" y="362" class="t m muted" font-size="11" text-anchor="end">sf-builder-guard.py</text>
+  <text x="790" y="388" class="t" font-size="12">deploys to the build org, commits in its own worktree</text>
+  <text x="790" y="408" class="t" font-size="12">only when approved.json matches spec.md</text>
+  <rect x="776" y="438" width="368" height="80" rx="8" class="wr"/>
+  <text x="790" y="462" class="t m" font-size="13" font-weight="700" fill="#8f3f07">sf-qa</text>
+  <text x="1130" y="462" class="t m muted" font-size="11" text-anchor="end">sf-qa-guard.py</text>
+  <text x="790" y="488" class="t" font-size="12">test records in the build org; QA-org writes ask</text>
+  <text x="790" y="506" class="t" font-size="12">never metadata, never Prod</text>
+
+  <!-- case folder -->
+  <rect x="490" y="330" width="220" height="176" rx="10" fill="#ffffff" stroke="#18212b" stroke-width="1.6"/>
+  <text x="600" y="358" class="t" font-size="15" font-weight="700" text-anchor="middle">Case folder</text>
+  <text x="600" y="384" class="t m muted" font-size="12" text-anchor="middle">case.md</text>
+  <text x="600" y="402" class="t m muted" font-size="12" text-anchor="middle">intake.md · org.md</text>
+  <text x="600" y="420" class="t m muted" font-size="12" text-anchor="middle">repo.md · verdict.md</text>
+  <text x="600" y="438" class="t m muted" font-size="12" text-anchor="middle">spec.md · approved.json</text>
+  <text x="600" y="456" class="t m muted" font-size="12" text-anchor="middle">build.md · review.md</text>
+  <text x="600" y="474" class="t m muted" font-size="12" text-anchor="middle">qa.md</text>
+
+  <!-- flows -->
+  <line x1="480" y1="250" x2="320" y2="296" class="ar" marker-end="url(#a)"/>
+  <text x="378" y="262" class="t muted" font-size="11.5">brief</text>
+  <line x1="720" y1="250" x2="880" y2="296" class="ar" marker-end="url(#a)"/>
+  <text x="806" y="262" class="t muted" font-size="11.5">brief</text>
+  <line x1="440" y1="418" x2="488" y2="418" class="ar" marker-end="url(#a)"/>
+  <text x="464" y="410" class="t muted" font-size="11" text-anchor="middle">writes</text>
+  <line x1="760" y1="418" x2="712" y2="418" class="ar" marker-end="url(#a)"/>
+  <text x="736" y="410" class="t muted" font-size="11" text-anchor="middle">writes</text>
+  <line x1="600" y1="330" x2="600" y2="252" class="ar" marker-end="url(#a)"/>
+  <text x="610" y="296" class="t muted" font-size="11.5">reads files, returns ≤5 lines + path</text>
+
+  <!-- systems -->
+  <text x="600" y="574" class="t muted" font-size="12" text-anchor="middle">Agents read these systems (REST GET, origin/main, deploy history). The builder writes only to the build org and its worktree.</text>
+  <rect x="40" y="596" width="208" height="58" rx="8" class="or"/>
+  <text x="144" y="621" class="t" font-size="13.5" font-weight="700" text-anchor="middle">Jira + Confluence</text>
+  <text x="144" y="640" class="t m muted" font-size="11" text-anchor="middle">tickets · prior art · docs</text>
+  <rect x="268" y="596" width="208" height="58" rx="8" class="or"/>
+  <text x="372" y="621" class="t" font-size="13.5" font-weight="700" text-anchor="middle">Slack</text>
+  <text x="372" y="640" class="t m muted" font-size="11" text-anchor="middle">request threads</text>
+  <rect x="496" y="596" width="208" height="58" rx="8" class="or"/>
+  <text x="600" y="621" class="t" font-size="13.5" font-weight="700" text-anchor="middle">Salesforce orgs</text>
+  <text x="600" y="640" class="t m muted" font-size="11" text-anchor="middle">dev · qa · prod</text>
+  <rect x="724" y="596" width="208" height="58" rx="8" class="or"/>
+  <text x="828" y="621" class="t" font-size="13.5" font-weight="700" text-anchor="middle">Git repo</text>
+  <text x="828" y="640" class="t m muted" font-size="11" text-anchor="middle">origin/main · worktrees</text>
+  <rect x="952" y="596" width="208" height="58" rx="8" class="or"/>
+  <text x="1056" y="621" class="t" font-size="13.5" font-weight="700" text-anchor="middle">Gearset</text>
+  <text x="1056" y="640" class="t m muted" font-size="11" text-anchor="middle">pipeline · deploy history</text>
+</svg>

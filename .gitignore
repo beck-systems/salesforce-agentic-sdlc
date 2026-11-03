@@ -1,0 +1,8 @@
+# Real company data never belongs in this repo
+config.json
+org-profile.md
+sf-cases/
+*.case/
+.DS_Store
+__pycache__/
+*.pyc

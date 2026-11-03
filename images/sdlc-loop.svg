@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" role="img" aria-label="The /sf-ticket loop: nine fixed phases from open case to close, with operator gates at intake, spec approval, promotion and close, and bounded retry loops for verification and build.">
+  <style>
+    .t{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;fill:#18212b}
+    .m{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    .muted{fill:#5b6776}
+    .lbl{font-size:11px;letter-spacing:1.2px;fill:#5b6776}
+    .name{font-size:17px;font-weight:700}
+    .ag{font-size:12.5px}
+    .out{font-size:12px;fill:#5b6776}
+    .ro{fill:#f3f7fc;stroke:#2563a8;stroke-width:1.5}
+    .wr{fill:#fdf5ec;stroke:#b45309;stroke-width:1.5}
+    .or{fill:#ffffff;stroke:#8795a6;stroke-width:1.5}
+    .ro-t{fill:#1d4f86}.wr-t{fill:#8f3f07}.or-t{fill:#18212b}
+    .gate{fill:#f1ebfe;stroke:#7c3aed;stroke-width:1}
+    .gate-t{font-size:11px;font-weight:600;fill:#6d28d9}
+    .ar{stroke:#5b6776;stroke-width:1.6;fill:none}
+    .retry{stroke:#b42318;stroke-width:1.4;fill:none;stroke-dasharray:5 4}
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#5b6776"/></marker>
+    <marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#b42318"/></marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="1199" height="639" rx="14" fill="#f8fafc" stroke="#d6dde6"/>
+  <text x="40" y="44" class="t" font-size="22" font-weight="700">/sf-ticket</text>
+  <text x="40" y="66" class="t muted" font-size="13">One entry point. Nine fixed phases. The lane decides which ones run.</text>
+
+  <!-- retry: verify -> investigate -->
+  <path d="M830 110 C830 78 600 78 600 106" class="retry" marker-end="url(#r)"/>
+  <text x="715" y="74" class="t" font-size="11.5" fill="#b42318" text-anchor="middle">REFUTED → one more round (max 1)</text>
+
+  <!-- row 1 -->
+  <g>
+    <rect x="40" y="110" width="200" height="150" rx="10" class="or"/>
+    <text x="56" y="136" class="t lbl">PHASE 0</text>
+    <text x="56" y="162" class="t name">Open case</text>
+    <text x="56" y="190" class="t m ag or-t">orchestrator</text>
+    <text x="56" y="208" class="t muted" font-size="12">resumes if it exists</text>
+    <text x="56" y="238" class="t m out">case.md</text>
+  </g>
+  <g>
+    <rect x="270" y="110" width="200" height="150" rx="10" class="ro"/>
+    <text x="286" y="136" class="t lbl">PHASE 1</text>
+    <rect x="392" y="122" width="66" height="20" rx="10" class="gate"/><text x="425" y="136" class="t gate-t" text-anchor="middle">⏸ gate</text>
+    <text x="286" y="162" class="t name">Intake</text>
+    <text x="286" y="190" class="t m ag ro-t">sf-intake</text>
+    <text x="286" y="208" class="t muted" font-size="12">Jira · Slack · Confluence</text>
+    <text x="286" y="238" class="t m out">intake.md</text>
+  </g>
+  <g>
+    <rect x="500" y="110" width="200" height="150" rx="10" class="ro"/>
+    <text x="516" y="136" class="t lbl">PHASE 2</text>
+    <text x="516" y="162" class="t name">Investigate</text>
+    <text x="516" y="190" class="t m ag ro-t">sf-org-investigator</text>
+    <text x="516" y="208" class="t m ag ro-t">sf-repo-investigator</text>
+    <text x="516" y="238" class="t m out">org.md · repo.md</text>
+  </g>
+  <g>
+    <rect x="730" y="110" width="200" height="150" rx="10" class="ro"/>
+    <text x="746" y="136" class="t lbl">PHASE 3</text>
+    <text x="746" y="162" class="t name">Verify</text>
+    <text x="746" y="190" class="t m ag ro-t">sf-verifier</text>
+    <text x="746" y="208" class="t muted" font-size="12">FINDINGS mode · Opus</text>
+    <text x="746" y="238" class="t m out">verdict.md</text>
+  </g>
+  <g>
+    <rect x="960" y="110" width="200" height="150" rx="10" class="or"/>
+    <text x="976" y="136" class="t lbl">PHASE 4</text>
+    <rect x="1082" y="122" width="66" height="20" rx="10" class="gate"/><text x="1115" y="136" class="t gate-t" text-anchor="middle">⏸ gate</text>
+    <text x="976" y="162" class="t name">Spec + approval</text>
+    <text x="976" y="190" class="t m ag or-t">orchestrator</text>
+    <text x="976" y="208" class="t muted" font-size="12">operator approves</text>
+    <text x="976" y="238" class="t m out">spec.md · approved.json</text>
+  </g>
+  <line x1="240" y1="185" x2="268" y2="185" class="ar" marker-end="url(#a)"/>
+  <line x1="470" y1="185" x2="498" y2="185" class="ar" marker-end="url(#a)"/>
+  <line x1="700" y1="185" x2="728" y2="185" class="ar" marker-end="url(#a)"/>
+  <line x1="930" y1="185" x2="958" y2="185" class="ar" marker-end="url(#a)"/>
+  <line x1="1060" y1="260" x2="1060" y2="338" class="ar" marker-end="url(#a)"/>
+
+  <!-- row 2 (right to left) -->
+  <g>
+    <rect x="960" y="340" width="200" height="150" rx="10" class="wr"/>
+    <text x="976" y="366" class="t lbl">PHASE 5</text>
+    <text x="976" y="392" class="t name">Build</text>
+    <text x="976" y="420" class="t m ag wr-t">sf-builder</text>
+    <text x="976" y="438" class="t muted" font-size="12">then sf-verifier DIFF</text>
+    <text x="976" y="468" class="t m out">build.md · review.md</text>
+  </g>
+  <g>
+    <rect x="730" y="340" width="200" height="150" rx="10" class="wr"/>
+    <text x="746" y="366" class="t lbl">PHASE 6</text>
+    <text x="746" y="392" class="t name">QA</text>
+    <text x="746" y="420" class="t m ag wr-t">sf-qa</text>
+    <text x="746" y="438" class="t muted" font-size="12">build-org mode</text>
+    <text x="746" y="468" class="t m out">qa.md</text>
+  </g>
+  <g>
+    <rect x="500" y="340" width="200" height="150" rx="10" class="or"/>
+    <text x="516" y="366" class="t lbl">PHASE 7</text>
+    <rect x="622" y="352" width="66" height="20" rx="10" class="gate"/><text x="655" y="366" class="t gate-t" text-anchor="middle">⏸ gate</text>
+    <text x="516" y="392" class="t name">Promote</text>
+    <text x="516" y="420" class="t m ag or-t">Gearset PR</text>
+    <text x="516" y="438" class="t muted" font-size="12">→ QA org → Prod</text>
+    <text x="516" y="468" class="t m out">PR · qa.md (qa mode)</text>
+  </g>
+  <g>
+    <rect x="270" y="340" width="200" height="150" rx="10" class="or"/>
+    <text x="286" y="366" class="t lbl">PHASE 8</text>
+    <rect x="392" y="352" width="66" height="20" rx="10" class="gate"/><text x="425" y="366" class="t gate-t" text-anchor="middle">⏸ gate</text>
+    <text x="286" y="392" class="t name">Close</text>
+    <text x="286" y="420" class="t m ag or-t">orchestrator</text>
+    <text x="286" y="438" class="t muted" font-size="12">Jira · Confluence · Slack</text>
+    <text x="286" y="468" class="t m out">status: done</text>
+  </g>
+  <g>
+    <rect x="40" y="340" width="200" height="150" rx="10" fill="none" stroke="#8795a6" stroke-dasharray="4 4"/>
+    <text x="56" y="366" class="t lbl">CASE FOLDER</text>
+    <text x="56" y="394" class="t" font-size="12.5">Every phase writes a file</text>
+    <text x="56" y="412" class="t" font-size="12.5">to the ticket's folder.</text>
+    <text x="56" y="440" class="t muted" font-size="12.5">Re-running /sf-ticket</text>
+    <text x="56" y="458" class="t muted" font-size="12.5">resumes at the first</text>
+    <text x="56" y="476" class="t muted" font-size="12.5">unchecked phase.</text>
+  </g>
+  <line x1="960" y1="415" x2="932" y2="415" class="ar" marker-end="url(#a)"/>
+  <line x1="730" y1="415" x2="702" y2="415" class="ar" marker-end="url(#a)"/>
+  <line x1="500" y1="415" x2="472" y2="415" class="ar" marker-end="url(#a)"/>
+
+  <!-- retry: QA / review -> build -->
+  <path d="M830 490 C830 530 1060 530 1060 494" class="retry" marker-end="url(#r)"/>
+  <text x="945" y="546" class="t" font-size="11.5" fill="#b42318" text-anchor="middle">QA fail or review defect → rebuild (max 2)</text>
+
+  <!-- legend -->
+  <rect x="40" y="590" width="14" height="14" rx="3" class="ro"/><text x="62" y="602" class="t" font-size="12.5">read-only agent (hook-enforced)</text>
+  <rect x="300" y="590" width="14" height="14" rx="3" class="wr"/><text x="322" y="602" class="t" font-size="12.5">writes build org + worktree only</text>
+  <rect x="560" y="590" width="14" height="14" rx="3" class="or"/><text x="582" y="602" class="t" font-size="12.5">orchestrator (main session)</text>
+  <rect x="800" y="588" width="58" height="18" rx="9" class="gate"/><text x="829" y="601" class="t gate-t" text-anchor="middle">⏸ gate</text><text x="868" y="602" class="t" font-size="12.5">operator says yes, one OK per action</text>
+</svg>
